@@ -11,7 +11,7 @@ import org.json.simple.parser.JSONParser;
 
 public class JsonReaderDao {
 
-	public static void main(String args[]) {
+	public void uploadJson() {
 		try {
 
 			String driver = "com.mysql.cj.jdbc.Driver";

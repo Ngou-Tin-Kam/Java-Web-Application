@@ -28,6 +28,7 @@ ResultSet resultSet = null;
 <title>Insert title here</title>
 </head>
 <body>
+
 	<h1>Data from database</h1>
 
 	<table border="1">
