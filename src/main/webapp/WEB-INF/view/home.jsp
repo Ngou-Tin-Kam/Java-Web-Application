@@ -25,12 +25,23 @@ ResultSet resultSet = null;
 <html>
 <head>
 <meta http-equiv="Content-Type" charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Java Web Application</title>
 </head>
 <body>
 
 	<h1>Data from database</h1>
 
+	<form id="form" action="<%= request.getContextPath() %>/HomeServlet" method="post">
+		<input type="search" id="query" name="q" placeholder="Filter Keyword">
+		<label for="filter">Filter By:</label>
+  			<select name="filter" id="filter">
+	    		<option value="game">Game</option>
+	   			<option value="clientId">Client Id</option>
+	    		<option value="date">Date</option>
+  			</select>
+		<button>Filter</button>
+	</form>
+	<br>
 	<table border="1">
 		<tr>
 			<td>Id</td>
