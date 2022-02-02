@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -33,13 +32,13 @@ ResultSet resultSet = null;
 
 	<table border="1">
 		<tr>
-			<td>id</td>
-			<td>numbets</td>
-			<td>game</td>
-			<td>stake</td>
-			<td>returns</td>
-			<td>clientid</td>
-			<td>date</td>
+			<td>Id</td>
+			<td>Number of Bets</td>
+			<td>Game</td>
+			<td>Stake</td>
+			<td>Returns</td>
+			<td>Client Id</td>
+			<td>Date</td>
 		</tr>
 
 		<%
