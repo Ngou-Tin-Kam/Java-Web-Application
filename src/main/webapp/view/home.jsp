@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -10,7 +11,7 @@ String url = "jdbc:mysql://localhost:3306/gambling?autoReconnect=true&useSSL=fal
 String userId = "root";
 String password = "password";
 
-try{
+try {
 	Class.forName(driver);
 } catch (Exception ex) {
 	ex.printStackTrace();
@@ -19,7 +20,6 @@ try{
 Connection connection = null;
 Statement statement = null;
 ResultSet resultSet = null;
-
 %>
 
 <!DOCTYPE html>
@@ -29,44 +29,44 @@ ResultSet resultSet = null;
 <title>Insert title here</title>
 </head>
 <body>
-<h1>Data from database</h1>
+	<h1>Data from database</h1>
 
-<table border="1">
-<tr>
-<td>id</td>
-<td>numbets</td>
-<td>game</td>
-<td>stake</td>
-<td>returns</td>
-<td>clientid</td>
-<td>date</td>
-</tr>
+	<table border="1">
+		<tr>
+			<td>id</td>
+			<td>numbets</td>
+			<td>game</td>
+			<td>stake</td>
+			<td>returns</td>
+			<td>clientid</td>
+			<td>date</td>
+		</tr>
 
-<%
-try{
-	connection = DriverManager.getConnection(url, userId, password);
-	String query = "select * from bets";
-	statement = connection.createStatement();
-	resultSet = statement.executeQuery(query);
-	while(resultSet.next()) {
+		<%
+		try {
+			connection = DriverManager.getConnection(url, userId, password);
+			String query = "select * from bets";
+			statement = connection.createStatement();
+			resultSet = statement.executeQuery(query);
+			while (resultSet.next()) {
 		%>
 		<tr>
-		<td><%=resultSet.getInt("id") %></td>
-		<td><%=resultSet.getInt("numbets") %></td>
-		<td><%=resultSet.getString("game") %></td>
-		<td><%=resultSet.getDouble("stake") %></td>
-		<td><%=resultSet.getDouble("returns") %></td>
-		<td><%=resultSet.getInt("clientid") %></td>
-		<td><%=resultSet.getString("date") %></td>
+			<td><%=resultSet.getInt("id")%></td>
+			<td><%=resultSet.getInt("numbets")%></td>
+			<td><%=resultSet.getString("game")%></td>
+			<td><%=resultSet.getDouble("stake")%></td>
+			<td><%=resultSet.getDouble("returns")%></td>
+			<td><%=resultSet.getInt("clientid")%></td>
+			<td><%=resultSet.getString("date")%></td>
 		</tr>
-<%
-	}
-	connection.close();
-} catch (Exception ex) {
-	ex.printStackTrace();
-}
-%>
+		<%
+		}
+		connection.close();
+		} catch (Exception ex) {
+		ex.printStackTrace();
+		}
+		%>
 
-</table>
+	</table>
 </body>
 </html>
