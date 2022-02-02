@@ -1,9 +1,10 @@
+package dao;
+
 import java.io.FileReader;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
-import java.util.Iterator;
+
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,7 +16,7 @@ public class JsonReader {
 	public static void main(String args[]) {
 		try {
 			
-			String driver = "com.mysql.jdbc.Driver";
+			String driver = "com.mysql.cj.jdbc.Driver";
 			String url = "jdbc:mysql://localhost:3306/gambling?autoReconnect=true&useSSL=false";
 			Class.forName(driver);
 			Connection connection = DriverManager.getConnection(url, "root", "password");
@@ -26,7 +27,7 @@ public class JsonReader {
 			
 			
 			JSONParser jsonParser = new JSONParser();
-			JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader("C:\\Users\\red_s\\eclipse-workspace\\Java-Web-Application\\src\\main\\resource\\bets.json"));
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(new FileReader("D:\\eclipse-workspace\\Java-Web-Application\\src\\main\\resource\\bets.json"));
 			JSONArray betsJsonArray = (JSONArray) jsonObject.get("bets");
 				
 			for(int n = 0; n < betsJsonArray.size(); n++) {
