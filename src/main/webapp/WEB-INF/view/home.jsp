@@ -1,4 +1,5 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1"
+	pageEncoding="ISO-8859-1"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
@@ -13,14 +14,15 @@
 </head>
 <body>
 
-	<h1>Data from database</h1>
+	<h1>Bets Data</h1>
 
-	<form id="form" action="<%=request.getContextPath()%>/HomeServlet" method="post">
-		<input type="search" id="query" name="q" placeholder="Filter Keyword">
-		<label for="filter">Filter By:</label> <select name="filter"
-			id="filter">
+	<form id="form" action="<%=request.getContextPath()%>/HomeServlet"
+		method="post">
+		<input type="search" id="query" name="query"
+			placeholder="Filter Keyword"> <label for="filter">Filter
+			By:</label> <select name="filter" id="filter">
 			<option value="game">Game</option>
-			<option value="clientId">Client Id</option>
+			<option value="clientid">Client Id</option>
 			<option value="date">Date</option>
 		</select>
 		<button>Filter</button>
@@ -36,7 +38,7 @@
 			<td>Client Id</td>
 			<td>Date</td>
 		</tr>
-		
+
 		<%
 		Iterator iterator;
 		List listOfBets = (List) request.getAttribute("betList");

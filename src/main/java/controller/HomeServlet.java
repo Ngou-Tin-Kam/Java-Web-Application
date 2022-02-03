@@ -16,25 +16,28 @@ import dao.ReadBetsDao;
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private JsonReaderDao jsonReaderDao;
-	private ReadBetsDao readBetsDao;
+	private ReadBetsDao readBetsDao = new ReadBetsDao();
 	private List listOfBets;
-	
+
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("GET");
 		jsonReaderDao = new JsonReaderDao();
 		jsonReaderDao.uploadJson();
-		
-		readBetsDao = new ReadBetsDao();
+
 		listOfBets = readBetsDao.readBets();
 		request.setAttribute("betList", listOfBets);
-		
+
 		request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);
 	}
-	
+
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("POST");
+		String search = request.getParameter("query");
+		String filter = request.getParameter("filter");
+
+		listOfBets = readBetsDao.filterBets(search, filter);
+		request.setAttribute("betList", listOfBets);
+
 		request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);
 	}
 }
