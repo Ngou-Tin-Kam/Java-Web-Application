@@ -8,14 +8,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Bet;
 import model.Search;
 
 public class ReadBetsDao {
 	private String driver = "com.mysql.cj.jdbc.Driver";
 	private String url = "jdbc:mysql://localhost:3306/gambling?autoReconnect=true&useSSL=false";
 
-	public List readBets() {
-		List betsList = new ArrayList();
+	public List<Bet> readBets() {
+		List<Bet> betsList = new ArrayList<Bet>();
 
 		try {
 			Class.forName(driver);
@@ -25,13 +26,17 @@ public class ReadBetsDao {
 			ResultSet resultSet = statement.executeQuery(query);
 
 			while (resultSet.next()) {
-				betsList.add(resultSet.getInt("id"));
-				betsList.add(resultSet.getInt("numbets"));
-				betsList.add(resultSet.getString("game"));
-				betsList.add(resultSet.getDouble("stake"));
-				betsList.add(resultSet.getDouble("returns"));
-				betsList.add(resultSet.getInt("clientid"));
-				betsList.add(resultSet.getString("date"));
+				
+				Bet bet = new Bet();
+				bet.setId(resultSet.getInt("id"));
+				bet.setNumbets(resultSet.getInt("numbets"));
+				bet.setGame(resultSet.getString("game"));
+				bet.setStake(resultSet.getDouble("stake"));
+				bet.setReturns(resultSet.getDouble("returns"));
+				bet.setClientId(resultSet.getInt("clientid"));
+				bet.setDate(resultSet.getString("date"));
+				
+				betsList.add(bet);
 			}
 
 			connection.close();
@@ -43,8 +48,8 @@ public class ReadBetsDao {
 		return betsList;
 	}
 
-	public List filterBets(Search search) {
-		List betsList = new ArrayList();
+	public List<Bet> filterBets(Search search) {
+		List<Bet> betsList = new ArrayList<Bet>();
 
 		try {
 			Class.forName(driver);
@@ -66,13 +71,16 @@ public class ReadBetsDao {
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
-				betsList.add(resultSet.getInt("id"));
-				betsList.add(resultSet.getInt("numbets"));
-				betsList.add(resultSet.getString("game"));
-				betsList.add(resultSet.getDouble("stake"));
-				betsList.add(resultSet.getDouble("returns"));
-				betsList.add(resultSet.getInt("clientid"));
-				betsList.add(resultSet.getString("date"));
+				Bet bet = new Bet();
+				bet.setId(resultSet.getInt("id"));
+				bet.setNumbets(resultSet.getInt("numbets"));
+				bet.setGame(resultSet.getString("game"));
+				bet.setStake(resultSet.getDouble("stake"));
+				bet.setReturns(resultSet.getDouble("returns"));
+				bet.setClientId(resultSet.getInt("clientid"));
+				bet.setDate(resultSet.getString("date"));
+				
+				betsList.add(bet);
 			}
 
 			connection.close();

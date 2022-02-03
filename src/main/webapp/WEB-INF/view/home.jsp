@@ -5,6 +5,7 @@
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.util.*"%>
+<%@page import="model.Bet" %>
 
 <!DOCTYPE html>
 <html>
@@ -40,18 +41,17 @@
 		</tr>
 
 		<%
-		Iterator iterator;
-		List listOfBets = (List) request.getAttribute("betList");
-		for (iterator = listOfBets.iterator(); iterator.hasNext();) {
+		ArrayList<Bet> listOfBets = (ArrayList<Bet>) request.getAttribute("betList");
+		for (Bet bet : listOfBets) {
 		%>
 		<tr>
-			<td><%=iterator.next()%></td>
-			<td><%=iterator.next()%></td>
-			<td><%=iterator.next()%></td>
-			<td><%=iterator.next()%></td>
-			<td><%=iterator.next()%></td>
-			<td><%=iterator.next()%></td>
-			<td><%=iterator.next()%></td>
+			<td><%=bet.getId()%></td>
+			<td><%=bet.getNumbets()%></td>
+			<td><%=bet.getGame()%></td>
+			<td><%=bet.getStake()%></td>
+			<td><%=bet.getReturns()%></td>
+			<td><%=bet.getClientId()%></td>
+			<td><%=bet.getDate()%></td>
 		</tr>
 		<%
 		}

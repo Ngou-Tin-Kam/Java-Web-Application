@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.JsonReaderDao;
 import dao.ReadBetsDao;
+import model.Bet;
 import model.Search;
 
 @WebServlet("/HomeServlet")
@@ -18,7 +19,7 @@ public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private JsonReaderDao jsonReaderDao;
 	private ReadBetsDao readBetsDao = new ReadBetsDao();
-	private List listOfBets;
+	private List<Bet> listOfBets;
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
