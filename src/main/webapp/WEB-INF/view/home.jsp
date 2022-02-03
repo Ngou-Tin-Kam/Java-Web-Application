@@ -1,25 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.Statement"%>
 <%@page import="java.sql.Connection"%>
-
-<%
-String driver = "com.mysql.cj.jdbc.Driver";
-String url = "jdbc:mysql://localhost:3306/gambling?autoReconnect=true&useSSL=false";
-String userId = "root";
-String password = "password";
-
-try {
-	Class.forName(driver);
-} catch (Exception ex) {
-	ex.printStackTrace();
-}
-
-Connection connection = null;
-Statement statement = null;
-ResultSet resultSet = null;
-%>
+<%@page import="java.util.*"%>
 
 <!DOCTYPE html>
 <html>
@@ -31,14 +15,14 @@ ResultSet resultSet = null;
 
 	<h1>Data from database</h1>
 
-	<form id="form" action="<%= request.getContextPath() %>/HomeServlet" method="post">
+	<form id="form" action="<%=request.getContextPath()%>/HomeServlet" method="post">
 		<input type="search" id="query" name="q" placeholder="Filter Keyword">
-		<label for="filter">Filter By:</label>
-  			<select name="filter" id="filter">
-	    		<option value="game">Game</option>
-	   			<option value="clientId">Client Id</option>
-	    		<option value="date">Date</option>
-  			</select>
+		<label for="filter">Filter By:</label> <select name="filter"
+			id="filter">
+			<option value="game">Game</option>
+			<option value="clientId">Client Id</option>
+			<option value="date">Date</option>
+		</select>
 		<button>Filter</button>
 	</form>
 	<br>
@@ -52,32 +36,24 @@ ResultSet resultSet = null;
 			<td>Client Id</td>
 			<td>Date</td>
 		</tr>
-
+		
 		<%
-		try {
-			connection = DriverManager.getConnection(url, userId, password);
-			String query = "select * from bets";
-			statement = connection.createStatement();
-			resultSet = statement.executeQuery(query);
-			while (resultSet.next()) {
+		Iterator iterator;
+		List listOfBets = (List) request.getAttribute("betList");
+		for (iterator = listOfBets.iterator(); iterator.hasNext();) {
 		%>
 		<tr>
-			<td><%=resultSet.getInt("id")%></td>
-			<td><%=resultSet.getInt("numbets")%></td>
-			<td><%=resultSet.getString("game")%></td>
-			<td><%=resultSet.getDouble("stake")%></td>
-			<td><%=resultSet.getDouble("returns")%></td>
-			<td><%=resultSet.getInt("clientid")%></td>
-			<td><%=resultSet.getString("date")%></td>
+			<td><%=iterator.next()%></td>
+			<td><%=iterator.next()%></td>
+			<td><%=iterator.next()%></td>
+			<td><%=iterator.next()%></td>
+			<td><%=iterator.next()%></td>
+			<td><%=iterator.next()%></td>
+			<td><%=iterator.next()%></td>
 		</tr>
 		<%
 		}
-		connection.close();
-		} catch (Exception ex) {
-		ex.printStackTrace();
-		}
 		%>
-
 	</table>
 </body>
 </html>
