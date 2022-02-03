@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.JsonReaderDao;
 import dao.ReadBetsDao;
+import model.Search;
 
 @WebServlet("/HomeServlet")
 public class HomeServlet extends HttpServlet {
@@ -32,10 +33,14 @@ public class HomeServlet extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String search = request.getParameter("query");
+		String query = request.getParameter("query");
 		String filter = request.getParameter("filter");
 
-		listOfBets = readBetsDao.filterBets(search, filter);
+		Search search = new Search();
+		search.setSearchKeyword(query);
+		search.setFilterBy(filter);
+		
+		listOfBets = readBetsDao.filterBets(search);
 		request.setAttribute("betList", listOfBets);
 
 		request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);

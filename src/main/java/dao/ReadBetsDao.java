@@ -8,6 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.Search;
+
 public class ReadBetsDao {
 	private String driver = "com.mysql.cj.jdbc.Driver";
 	private String url = "jdbc:mysql://localhost:3306/gambling?autoReconnect=true&useSSL=false";
@@ -41,14 +43,14 @@ public class ReadBetsDao {
 		return betsList;
 	}
 
-	public List filterBets(String search, String filter) {
+	public List filterBets(Search search) {
 		List betsList = new ArrayList();
 
 		try {
 			Class.forName(driver);
 			Connection connection = DriverManager.getConnection(url, "root", "password");
 			String query = null;
-			switch (filter) {
+			switch (search.getFilterBy()) {
 			case "game":
 				query = "select * from bets where game = ?";
 				break;
@@ -60,7 +62,7 @@ public class ReadBetsDao {
 				break;
 			}
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
-			preparedStatement.setString(1, search);
+			preparedStatement.setString(1, search.getSearchKeyword());
 			ResultSet resultSet = preparedStatement.executeQuery();
 
 			while (resultSet.next()) {
