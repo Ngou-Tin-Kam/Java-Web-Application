@@ -56,7 +56,7 @@ public class Bet implements Serializable {
 		return clientid;
 	}
 
-	public void SetClientId(int clientid) {
+	public void setClientId(int clientid) {
 		this.clientid = clientid;
 	}
 

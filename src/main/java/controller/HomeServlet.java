@@ -11,13 +11,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.JsonReaderDao;
 import dao.ReadBetsDao;
+import model.Bet;
+import model.Search;
 
 @WebServlet("/HomeServlet")
 public class HomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private JsonReaderDao jsonReaderDao;
 	private ReadBetsDao readBetsDao = new ReadBetsDao();
-	private List listOfBets;
+	private List<Bet> listOfBets;
 
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,10 +34,14 @@ public class HomeServlet extends HttpServlet {
 
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String search = request.getParameter("query");
+		String query = request.getParameter("query");
 		String filter = request.getParameter("filter");
 
-		listOfBets = readBetsDao.filterBets(search, filter);
+		Search search = new Search();
+		search.setSearchKeyword(query);
+		search.setFilterBy(filter);
+		
+		listOfBets = readBetsDao.filterBets(search);
 		request.setAttribute("betList", listOfBets);
 
 		request.getRequestDispatcher("/WEB-INF/view/home.jsp").forward(request, response);
