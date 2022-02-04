@@ -24,8 +24,10 @@ public class JsonReaderDao {
 			PreparedStatement preparedStatement = connection.prepareStatement(query);
 
 			JSONParser jsonParser = new JSONParser();
-			JSONObject jsonObject = (JSONObject) jsonParser.parse(
-					new FileReader("D:\\eclipse-workspace\\Java-Web-Application\\src\\main\\resource\\bets.json"));
+			String dir = System.getProperty("user.dir");
+			FileReader reader = new FileReader(dir + "\\Java-Web-Application\\src\\main\\resource\\bets.json");
+			
+			JSONObject jsonObject = (JSONObject) jsonParser.parse(reader);
 			JSONArray betsJsonArray = (JSONArray) jsonObject.get("bets");
 
 			for (int n = 0; n < betsJsonArray.size(); n++) {
